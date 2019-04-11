@@ -3,12 +3,13 @@
  * @LastEditors: tqcenglish
  * @Email: tqcenglish#gmail.com
  * @Description: 一梦如是，总归虚无
- * @LastEditTime: 2019-04-11 17:16:55
+ * @LastEditTime: 2019-04-11 18:01:58
  */
 
 package routes
 
 import (
+	"fmt"
 	"io/ioutil"
 	"strings"
 
@@ -95,13 +96,19 @@ func Update(ctx *context.Context) {
 	dir := ctx.Params("dir")
 	file := ctx.Params("filename")
 	context := ctx.Req.PostFormValue("context")
-	log.Debug(setting.Docs.Target + "/" + lang + "/" + dir + "/" + file)
 
-	err = ioutil.WriteFile(setting.Docs.Target+"/"+lang+"/"+dir+"/"+file, []byte(context), 0644)
+	log.Debug(setting.Docs.Target + "/" + lang + "/" + dir + "/" + file)
+	err = ioutil.WriteFile(setting.Docs.Target+"/"+lang+"/"+dir+"/"+file, []byte(strings.TrimSpace(context)), 0644)
 	if err != nil {
 		log.Error(err)
 		ctx.Error(500)
 		return
 	}
-	ctx.JSON(200, nil)
+	// remove .md
+	fileName := file[:len(file)-3]
+	if fileName == "README" {
+		ctx.JSON(200, map[string]string{"path": fmt.Sprintf("/docs/%s", dir)})
+		return
+	}
+	ctx.JSON(200, map[string]string{"path": fmt.Sprintf("/docs/%s/%s", dir, fileName)})
 }
