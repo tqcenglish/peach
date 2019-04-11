@@ -24,9 +24,9 @@ import (
 	"github.com/Unknwon/com"
 	"github.com/Unknwon/log"
 
-	"peach/models"
-	"peach/pkg/context"
-	"peach/pkg/setting"
+	"k-peach/models"
+	"k-peach/pkg/context"
+	"k-peach/pkg/setting"
 )
 
 func renderEditPage(ctx *context.Context, documentPath string) {

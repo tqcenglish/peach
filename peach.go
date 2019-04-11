@@ -21,8 +21,8 @@ import (
 
 	"github.com/urfave/cli"
 
-	"peach/cmd"
-	"peach/pkg/setting"
+	"k-peach/cmd"
+	"k-peach/pkg/setting"
 )
 
 //APP_VER fork peach

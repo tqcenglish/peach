@@ -27,5 +27,4 @@ peach.sublime-project
 custom*
 data
 /.idea
-/peach
-/go-peach
+/k-peach

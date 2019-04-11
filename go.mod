@@ -1,4 +1,4 @@
-module peach
+module k-peach
 
 go 1.12
 

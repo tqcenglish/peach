@@ -26,7 +26,7 @@ import (
 	"time"
 	"unicode/utf8"
 
-	"peach/pkg/setting"
+	"k-peach/pkg/setting"
 
 	"github.com/Unknwon/com"
 	blackfridaytext "github.com/mschoch/blackfriday-text"

@@ -15,9 +15,9 @@
 package routes
 
 import (
-	"peach/models"
-	"peach/pkg/context"
-	"peach/pkg/setting"
+	"k-peach/models"
+	"k-peach/pkg/context"
+	"k-peach/pkg/setting"
 )
 
 // Search 搜索处理

@@ -22,7 +22,7 @@ import (
 	"gopkg.in/ini.v1"
 	"gopkg.in/macaron.v1"
 
-	"peach/pkg/bindata"
+	"k-peach/pkg/bindata"
 )
 
 type NavbarItem struct {

@@ -13,9 +13,9 @@ import (
 	"io/ioutil"
 	"strings"
 
-	"peach/models"
-	"peach/pkg/context"
-	"peach/pkg/setting"
+	"k-peach/models"
+	"k-peach/pkg/context"
+	"k-peach/pkg/setting"
 
 	log "github.com/sirupsen/logrus"
 )

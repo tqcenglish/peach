@@ -20,8 +20,8 @@ import (
 	"encoding/hex"
 	"strings"
 
-	"peach/models"
-	"peach/pkg/context"
+	"k-peach/models"
+	"k-peach/pkg/context"
 )
 
 func authRequired(ctx *context.Context) {
