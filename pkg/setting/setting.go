@@ -15,12 +15,14 @@
 package setting
 
 import (
+	"io/ioutil"
+
 	"github.com/Unknwon/com"
-	"github.com/Unknwon/log"
+	log "github.com/sirupsen/logrus"
 	"gopkg.in/ini.v1"
 	"gopkg.in/macaron.v1"
 
-	"github.com/peachdocs/peach/pkg/bindata"
+	"peach/pkg/bindata"
 )
 
 type NavbarItem struct {
@@ -45,7 +47,10 @@ func (t DocType) IsRemote() bool {
 }
 
 var (
+	//CustomConf 自定义配置路径
 	CustomConf = "custom/app.ini"
+	//CustomLocaleConfDir 自定义国际化路径
+	CustomLocaleConfDir = "custom/locale/"
 
 	AppVer   string
 	ProdMode bool
@@ -106,13 +111,15 @@ var (
 	Cfg *ini.File
 )
 
+// NewContext 读取配置
 func NewContext() {
-	log.Prefix = "[Peach]"
-
 	if !com.IsFile(CustomConf) {
 		log.Fatal("No custom configuration found: 'custom/app.ini'")
 	}
-	sources := []interface{}{bindata.MustAsset("conf/app.ini"), CustomConf}
+
+	//需要移除 github, 不使用已有配置
+	//sources := []interface{}{bindata.MustAsset("conf/app.ini"), CustomConf}
+	sources := []interface{}{CustomConf}
 
 	var err error
 	Cfg, err = macaron.SetConfig(sources[0], sources[1:]...)
@@ -125,6 +132,9 @@ func NewContext() {
 		ProdMode = true
 		macaron.Env = macaron.PROD
 		macaron.ColorLog = false
+		log.SetLevel(log.InfoLevel)
+	} else {
+		log.SetLevel(log.DebugLevel)
 	}
 
 	HTTPHost = sec.Key("HTTP_HOST").MustString("127.0.0.1")
@@ -180,7 +190,17 @@ func NewContext() {
 	Docs.Locales = make(map[string][]byte)
 	for _, lang := range Docs.Langs {
 		if lang == "en-US" || lang == "zh-CN" {
-			Docs.Locales["locale_"+lang+".ini"] = bindata.MustAsset("conf/locale/locale_" + lang + ".ini")
+			// 若自定义 locale 存在就使用
+			if com.IsFile(CustomLocaleConfDir + "locale_" + lang + ".ini") {
+				content, err := ioutil.ReadFile(CustomLocaleConfDir + "locale_" + lang + ".ini")
+				if err != nil {
+					log.Error(err)
+				}
+
+				Docs.Locales["locale_"+lang+".ini"] = content
+			} else {
+				Docs.Locales["locale_"+lang+".ini"] = bindata.MustAsset("conf/locale/locale_" + lang + ".ini")
+			}
 		} else {
 			Docs.Locales["locale_"+lang+".ini"] = []byte("")
 		}

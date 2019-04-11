@@ -3,11 +3,10 @@
 all: build run
 
 build:
-	go install -v
-	cp '$(GOPATH)/bin/peach' .
-
+	env GOOS=darwin GOARCH=amd64 go build -o go-peach;
+	cp  go-peach /Users/tqcenglish/Applications/bin/
 run:
-	./peach web
+	./go-peach web
 
 bindata:
 	go-bindata -o=pkg/bindata/bindata.go -ignore="\\.DS_Store|README|config.codekit|.less" -pkg=bindata templates/... conf/... public/...

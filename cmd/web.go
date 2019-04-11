@@ -18,16 +18,16 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/Unknwon/log"
 	"github.com/go-macaron/i18n"
 	"github.com/go-macaron/pongo2"
+	log "github.com/sirupsen/logrus"
 	"github.com/urfave/cli"
 	"gopkg.in/macaron.v1"
 
-	"github.com/peachdocs/peach/models"
-	"github.com/peachdocs/peach/pkg/context"
-	"github.com/peachdocs/peach/pkg/setting"
-	"github.com/peachdocs/peach/routes"
+	"peach/models"
+	"peach/pkg/context"
+	"peach/pkg/setting"
+	"peach/routes"
 )
 
 var Web = cli.Command{
@@ -56,6 +56,7 @@ func runWeb(ctx *cli.Context) {
 	m.Use(macaron.Statics(macaron.StaticOptions{
 		SkipLogging: setting.ProdMode,
 	}, "custom/public", "public", models.HTMLRoot))
+
 	m.Use(i18n.I18n(i18n.Options{
 		Files:       setting.Docs.Locales,
 		DefaultLang: setting.Docs.Langs[0],
@@ -71,8 +72,8 @@ func runWeb(ctx *cli.Context) {
 
 	m.Get("/", routes.Home)
 	m.Get(setting.Page.DocsBaseURL, routes.Docs)
-	m.Get(setting.Page.DocsBaseURL + "/images/*", routes.DocsStatic)
-	m.Get(setting.Page.DocsBaseURL + "/*", routes.Protect, routes.Docs)
+	m.Get(setting.Page.DocsBaseURL+"/images/*", routes.DocsStatic)
+	m.Get(setting.Page.DocsBaseURL+"/*", routes.Protect, routes.Docs)
 	m.Post("/hook", routes.Hook)
 	m.Get("/search", routes.Search)
 	m.Get("/*", routes.Pages)

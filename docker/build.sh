@@ -11,8 +11,8 @@ apk --no-cache --no-progress add --virtual build-deps go gcc musl-dev
 
 # Init go environment to build
 mkdir -p ${GOPATH}/src/github.com/peachdocs/
-ln -s /app/peach/ ${GOPATH}/src/github.com/peachdocs/peach
-cd ${GOPATH}/src/github.com/peachdocs/peach
+ln -s /app/peach/ ${GOPATH}/src/peach
+cd ${GOPATH}/src/peach
 go get -v
 mv ${GOPATH}/bin/peach .
 

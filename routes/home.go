@@ -20,9 +20,9 @@ import (
 
 	"github.com/Unknwon/com"
 
-	"github.com/peachdocs/peach/models"
-	"github.com/peachdocs/peach/pkg/context"
-	"github.com/peachdocs/peach/pkg/setting"
+	"peach/models"
+	"peach/pkg/context"
+	"peach/pkg/setting"
 )
 
 func Home(ctx *context.Context) {

@@ -26,12 +26,12 @@ import (
 	"time"
 	"unicode/utf8"
 
+	"peach/pkg/setting"
+
 	"github.com/Unknwon/com"
-	"github.com/mschoch/blackfriday-text"
+	blackfridaytext "github.com/mschoch/blackfriday-text"
 	"github.com/russross/blackfriday"
 	"gopkg.in/ini.v1"
-
-	"github.com/peachdocs/peach/pkg/setting"
 )
 
 type Node struct {
