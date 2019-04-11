@@ -39,6 +39,10 @@ var Web = cli.Command{
 	},
 }
 
+type ContextForm struct {
+	Context string `form:"context" binding:"Required"`
+}
+
 func runWeb(ctx *cli.Context) {
 	if ctx.IsSet("config") {
 		setting.CustomConf = ctx.String("config")
@@ -76,6 +80,8 @@ func runWeb(ctx *cli.Context) {
 	m.Get(setting.Page.DocsBaseURL+"/*", routes.Protect, routes.Docs)
 	m.Post("/hook", routes.Hook)
 	m.Get("/search", routes.Search)
+	m.Get("/edit/:lang/:dir/:filename", routes.Edit)
+	m.Post("/edit/:lang/:dir/:filename", routes.Update)
 	m.Get("/*", routes.Pages)
 
 	listenAddr := fmt.Sprintf("%s:%d", setting.HTTPHost, setting.HTTPPort)

@@ -38,6 +38,7 @@ func renderEditPage(ctx *context.Context, documentPath string) {
 	}
 }
 
+// Docs 文档
 func Docs(ctx *context.Context) {
 	toc := models.Tocs[ctx.Locale.Language()]
 	if toc == nil {

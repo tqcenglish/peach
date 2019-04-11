@@ -20,6 +20,7 @@ import (
 	"peach/pkg/setting"
 )
 
+// Search 搜索处理
 func Search(ctx *context.Context) {
 	ctx.Data["Title"] = ctx.Tr("search")
 

@@ -25,7 +25,8 @@ import (
 	"peach/pkg/setting"
 )
 
-const APP_VER = "0.9.6.0616"
+//APP_VER fork peach
+const APP_VER = "1.0.0"
 
 func init() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
@@ -35,10 +36,10 @@ func init() {
 func main() {
 	app := cli.NewApp()
 	app.Name = "Peach"
-	app.Usage = "Modern Documentation Server"
+	app.Usage = "Modern Documentation Knowledge Server"
 	app.Version = APP_VER
-	app.Author = "Unknwon"
-	app.Email = "u@gogs.io"
+	app.Author = "tqcenglish"
+	app.Email = "tqcenglish@gmail.com"
 	app.Commands = []cli.Command{
 		cmd.Web,
 		cmd.New,
