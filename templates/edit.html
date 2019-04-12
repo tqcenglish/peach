@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}{{Tr(Lang, "name")}} - {{Tr(Lang, "tag_line")}}{% endblock %}
+{% block body %}
+	<div class="ui inverted vertical center aligned segment">
+		{% include Page.NavbarTplPath %}
+	</div>
+	<div class="ui grid documentation container">
+		<textarea style="width:100%; height: 350px;">
+			{{Context}}
+		</textarea>
+	</div>
+	<script type="text/javascript" src="/js/stackedit.min.js"></script>
+	<script type="text/javascript" src="/js/edit.js"></script>
+{% endblock %}

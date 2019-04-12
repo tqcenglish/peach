@@ -22,7 +22,7 @@ $(document).ready(function () {
     		skipped_first = true;
     		return
     	}
-    	
+
         var node = $(this);
         var val = encodeURIComponent(node.text().toLowerCase().replace(/\s+/g, "-"));
         var name = val;
