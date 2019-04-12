@@ -76,7 +76,10 @@ func runNew(ctx *cli.Context) {
 	os.MkdirAll(target, os.ModePerm)
 
 	// Create default files.
-	dirs := []string{"templates", "public", "docs"}
+	// ! templates 不支持内存模版，所以 custom 下必须存在
+	// ! public 使用 内存 public
+	// dirs := []string{"templates", "public", "docs"}
+	dirs := []string{"docs"}
 	for _, dir := range dirs {
 		fmt.Printf("➜  Creating '%s'...\n", dir)
 		os.RemoveAll(filepath.Join(target, dir))

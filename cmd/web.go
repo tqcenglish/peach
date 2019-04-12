@@ -18,6 +18,9 @@ import (
 	"fmt"
 	"net/http"
 
+	kbindata "k-peach/pkg/bindata"
+
+	"github.com/go-macaron/bindata"
 	"github.com/go-macaron/i18n"
 	"github.com/go-macaron/pongo2"
 	log "github.com/sirupsen/logrus"
@@ -59,7 +62,18 @@ func runWeb(ctx *cli.Context) {
 	m.Use(macaron.Recovery())
 	m.Use(macaron.Statics(macaron.StaticOptions{
 		SkipLogging: setting.ProdMode,
-	}, "custom/public", "public", models.HTMLRoot))
+	}, "custom/public", models.HTMLRoot))
+
+	m.Use(macaron.Static("public",
+		macaron.StaticOptions{
+			FileSystem: bindata.Static(bindata.Options{
+				Asset:      kbindata.Asset,
+				AssetDir:   kbindata.AssetDir,
+				AssetNames: kbindata.AssetNames,
+				Prefix:     "public",
+			}),
+		},
+	))
 
 	m.Use(i18n.I18n(i18n.Options{
 		Files:       setting.Docs.Locales,

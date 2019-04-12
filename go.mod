@@ -6,7 +6,9 @@ require (
 	github.com/Unknwon/com v0.0.0-20190321035513-0fed4efef755
 	github.com/Unknwon/i18n v0.0.0-20171114194641-b64d33658966 // indirect
 	github.com/Unknwon/log v0.0.0-20150304194804-e617c87089d3
+	github.com/elazarl/go-bindata-assetfs v1.0.0 // indirect
 	github.com/flosch/pongo2 v0.0.0-20181225140029-79872a7b2769 // indirect
+	github.com/go-macaron/bindata v0.0.0-20161222093048-85786f57eee3
 	github.com/go-macaron/i18n v0.0.0-20190131234336-56731837a73b
 	github.com/go-macaron/inject v0.0.0-20160627170012-d8a0b8677191 // indirect
 	github.com/go-macaron/pongo2 v0.0.0-20180906102555-6074d2551820
