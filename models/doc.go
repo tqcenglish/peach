@@ -23,7 +23,9 @@ import (
 	"k-peach/pkg/setting"
 )
 
+// docs => html
 func initLangDocs(tocs map[string]*Toc, localRoot, lang string) {
+	log.Info("initLangDocs")
 	toc := tocs[lang]
 
 	for _, dir := range toc.Nodes {

@@ -27,6 +27,7 @@ import (
 	"k-peach/pkg/bindata"
 )
 
+//New 初始化项目
 var New = cli.Command{
 	Name:   "new",
 	Usage:  "Initialize a new Peach project",
@@ -39,7 +40,7 @@ var New = cli.Command{
 
 func checkYesNo() bool {
 	var choice string
-	fmt.Scan(&choice)
+	fmt.Scanln(&choice)
 	return strings.HasPrefix(strings.ToLower(choice), "y")
 }
 
@@ -65,7 +66,7 @@ func restoreAssets(target, dir string) {
 func runNew(ctx *cli.Context) {
 	target := ctx.String("target")
 	if com.IsExist(target) && !ctx.Bool("yes") {
-		fmt.Printf(toYellow("Directory '%s' already exists, do you want to overwrite?[Y/n] "), target)
+		fmt.Printf(toYellow("Directory '%s' already exists, do you want to overwrite?[N/y] "), target)
 		if !checkYesNo() {
 			os.Exit(0)
 		}
@@ -75,7 +76,7 @@ func runNew(ctx *cli.Context) {
 	os.MkdirAll(target, os.ModePerm)
 
 	// Create default files.
-	dirs := []string{"templates", "public"}
+	dirs := []string{"templates", "public", "docs"}
 	for _, dir := range dirs {
 		fmt.Printf("➜  Creating '%s'...\n", dir)
 		os.RemoveAll(filepath.Join(target, dir))
@@ -85,7 +86,7 @@ func runNew(ctx *cli.Context) {
 	// Create custom templates.
 	yes := ctx.Bool("yes")
 	if !yes {
-		fmt.Printf(toYellow("Do you want to use custom templates?[Y/n] "))
+		fmt.Printf(toYellow("Do you want to use custom templates?[N/y] "))
 		yes = checkYesNo()
 	}
 

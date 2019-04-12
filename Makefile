@@ -1,15 +1,15 @@
 .PHONY: build run
 
-all: build run
+all: bindata build
 
 build:
 	env GOOS=darwin GOARCH=amd64 go build -o k-peach;
 	cp  k-peach /Users/tqcenglish/Applications/bin/
 run:
-	./k-peach web
+	cd my.peach && ../k-peach web
 
 bindata:
-	go-bindata -o=pkg/bindata/bindata.go -ignore="\\.DS_Store|README|config.codekit|.less" -pkg=bindata templates/... conf/... public/...
+	go-bindata -o=pkg/bindata/bindata.go -ignore="\\.DS_Store|config.codekit|.less" -pkg=bindata templates/... conf/... public/... docs/...
 
 release:
 	env GOOS=darwin GOARCH=amd64 go build -o k-peach; tar czf darwin_amd64.tar.gz peach

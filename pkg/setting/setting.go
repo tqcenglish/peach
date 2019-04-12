@@ -113,18 +113,18 @@ var (
 
 // NewContext 读取配置
 func NewContext() {
+	var sources []interface{}
 	if !com.IsFile(CustomConf) {
-		log.Fatal("No custom configuration found: 'custom/app.ini'")
+		log.Warn("No custom configuration found: 'custom/app.ini'")
+		sources = []interface{}{bindata.MustAsset("conf/app.ini")}
+	} else {
+		sources = []interface{}{bindata.MustAsset("conf/app.ini"), CustomConf}
 	}
-
-	//需要移除 github, 不使用已有配置
-	//sources := []interface{}{bindata.MustAsset("conf/app.ini"), CustomConf}
-	sources := []interface{}{CustomConf}
 
 	var err error
 	Cfg, err = macaron.SetConfig(sources[0], sources[1:]...)
 	if err != nil {
-		log.Fatal("Fail to load config: %v", err)
+		log.Fatalf("Fail to load config: %v", err)
 	}
 
 	sec := Cfg.Section("")
@@ -134,6 +134,7 @@ func NewContext() {
 		macaron.ColorLog = false
 		log.SetLevel(log.InfoLevel)
 	} else {
+		log.SetReportCaller(true)
 		log.SetLevel(log.DebugLevel)
 	}
 

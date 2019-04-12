@@ -31,6 +31,7 @@ import (
 	"github.com/Unknwon/com"
 	blackfridaytext "github.com/mschoch/blackfriday-text"
 	"github.com/russross/blackfriday"
+	log "github.com/sirupsen/logrus"
 	"gopkg.in/ini.v1"
 )
 
@@ -90,9 +91,11 @@ func parseNodeName(name string, data []byte) (string, []byte) {
 	return title, data[endIdx+3:]
 }
 
+//ReloadContent 刷新
 func (n *Node) ReloadContent() error {
 	data, err := ioutil.ReadFile(n.FileName)
 	if err != nil {
+		log.Error(err)
 		return err
 	}
 
@@ -117,6 +120,7 @@ func HTML2JS(data []byte) []byte {
 	return []byte(s)
 }
 
+//GenHTML md => html
 func (n *Node) GenHTML(data []byte) error {
 	var htmlPath string
 	if setting.Docs.Type.IsLocal() {
@@ -124,6 +128,7 @@ func (n *Node) GenHTML(data []byte) error {
 	} else {
 		htmlPath = path.Join(HTMLRoot, strings.TrimPrefix(n.FileName, docsRoot))
 	}
+
 	htmlPath = strings.Replace(htmlPath, ".md", ".js", 1)
 
 	buf := new(bytes.Buffer)
@@ -326,6 +331,7 @@ func initToc(localRoot string) (map[string]*Toc, error) {
 	return tocs, nil
 }
 
+// ReloadDocs 重载文档
 func ReloadDocs() error {
 	tocLocker.Lock()
 	defer tocLocker.Unlock()
@@ -333,7 +339,9 @@ func ReloadDocs() error {
 	localRoot := setting.Docs.Target
 
 	// Fetch docs from remote.
+	// ? 默认使用 local 方式
 	if setting.Docs.Type.IsRemote() {
+		log.Info("use remote type")
 		localRoot = docsRoot
 
 		absRoot, err := filepath.Abs(localRoot)
@@ -359,6 +367,9 @@ func ReloadDocs() error {
 
 		// Append subdir to root as needed
 		localRoot = path.Join(localRoot, setting.Docs.TargetDir)
+	} else {
+		log.Info("use remote type")
+		docsRoot = localRoot
 	}
 
 	if !com.IsDir(localRoot) {
