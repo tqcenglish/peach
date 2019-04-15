@@ -94,11 +94,14 @@ func runWeb(ctx *cli.Context) {
 	m.Get(setting.Page.DocsBaseURL+"/*", routes.Protect, routes.Docs)
 	m.Post("/hook", routes.Hook)
 	m.Get("/search", routes.Search)
+	m.Get("/download", routes.Download)
+	m.Post("/upload", routes.Upload)
+	m.Get("/upload", routes.UploadPage)
 	m.Get("/edit/:lang/:dir/:filename", routes.Edit)
 	m.Post("/edit/:lang/:dir/:filename", routes.Update)
 	m.Get("/*", routes.Pages)
 
 	listenAddr := fmt.Sprintf("%s:%d", setting.HTTPHost, setting.HTTPPort)
-	log.Info("%s Listen on %s", setting.Site.Name, listenAddr)
-	log.Fatal("Fail to start Peach: %v", http.ListenAndServe(listenAddr, m))
+	log.Infof("%s Listen on %s", setting.Site.Name, listenAddr)
+	log.Fatalf("Fail to start Peach: %v", http.ListenAndServe(listenAddr, m))
 }

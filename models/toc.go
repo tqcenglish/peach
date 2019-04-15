@@ -102,10 +102,8 @@ func (n *Node) ReloadContent() error {
 	n.Title, data = parseNodeName(n.Name, data)
 	n.Plain = len(bytes.TrimSpace(data)) == 0
 
-	if !n.Plain {
-		n.SetText(bytes.ToLower(blackfriday.Markdown(data, textRender, 0)))
-		data = markdown(data)
-	}
+	n.SetText(bytes.ToLower(blackfriday.Markdown(data, textRender, 0)))
+	data = markdown(data)
 
 	return n.GenHTML(data)
 }
@@ -368,7 +366,7 @@ func ReloadDocs() error {
 		// Append subdir to root as needed
 		localRoot = path.Join(localRoot, setting.Docs.TargetDir)
 	} else {
-		log.Info("use remote type")
+		log.Info("use local type")
 		docsRoot = localRoot
 	}
 

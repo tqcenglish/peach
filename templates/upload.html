@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}{{Tr(Lang, "name")}} - {{Tr(Lang, "tag_line")}}{% endblock %}
+{% block body %}
+    <div class="ui inverted vertical center aligned segment">
+		{% include Page.NavbarTplPath %}
+	</div>
+	<div class="ui centered grid documentation container">
+        <form id="upload-form" action="/upload" method="post" enctype="multipart/form-data" >
+        　　<input type="file" id="upload" name="upload" /> 
+            <div class="ui list">
+                <div class="item">选择下载的文件包,修改后打包上传。</div>
+                <div class="item">上传 zip 文件需要保持结构不变。</div>
+                <div class="item">上传会覆盖原有目录，做好下载备份.</div>
+              </div>
+        　　　<input type="submit" class="small ui blue button" value="上传" />
+        </form>
+	</div>
+   
+	<script type="text/javascript">
+    </script>
+{% endblock %}

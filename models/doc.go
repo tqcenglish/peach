@@ -68,6 +68,7 @@ func initDocs(tocs map[string]*Toc, localRoot string) {
 	}
 }
 
+// NewContext 创建内容
 func NewContext() {
 	if com.IsExist(HTMLRoot) {
 		if err := os.RemoveAll(HTMLRoot); err != nil {

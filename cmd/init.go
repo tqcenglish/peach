@@ -89,8 +89,10 @@ func runNew(ctx *cli.Context) {
 	// Create custom templates.
 	yes := ctx.Bool("yes")
 	if !yes {
-		fmt.Printf(toYellow("Do you want to use custom templates?[N/y] "))
-		yes = checkYesNo()
+		// ! 当前没有复制模版到目录，所以必须有自定义模版
+		//fmt.Printf(toYellow("Do you want to use custom templates?[N/y] "))
+		//yes = checkYesNo()
+		yes = true
 	}
 
 	if yes {
