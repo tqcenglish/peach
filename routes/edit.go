@@ -3,7 +3,7 @@
  * @LastEditors: tqcenglish
  * @Email: tqcenglish#gmail.com
  * @Description: 一梦如是，总归虚无
- * @LastEditTime: 2019-04-15 14:14:19
+ * @LastEditTime: 2019-04-15 16:40:53
  */
 
 package routes
@@ -66,6 +66,11 @@ func Edit(ctx *context.Context) {
 	}
 	ctx.Data["Context"] = string(data)
 	ctx.HTML(200, "edit")
+}
+
+// StackeditApp app 请求处理
+func StackeditApp(ctx *context.Context) {
+	ctx.Redirect("/stackedit/index.html")
 }
 
 // Update 更新文档

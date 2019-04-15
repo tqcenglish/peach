@@ -99,6 +99,7 @@ func runWeb(ctx *cli.Context) {
 	m.Get("/upload", routes.UploadPage)
 	m.Get("/edit/:lang/:dir/:filename", routes.Edit)
 	m.Post("/edit/:lang/:dir/:filename", routes.Update)
+	m.Get("/stackedit/app", routes.StackeditApp)
 	m.Get("/*", routes.Pages)
 
 	listenAddr := fmt.Sprintf("%s:%d", setting.HTTPHost, setting.HTTPPort)

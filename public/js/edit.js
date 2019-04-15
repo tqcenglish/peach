@@ -1,6 +1,6 @@
 $(document).ready(function () {
     const el = document.querySelector('textarea');
-    const stackedit = new Stackedit();
+    const stackedit = new Stackedit({url: "/stackedit"});
     // Open the iframe
     stackedit.openFile({
       content: {
