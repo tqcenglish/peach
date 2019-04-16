@@ -4,10 +4,13 @@ name: 简介
 
 # K-Peach
 
-k-Peach 是一款支持多语言、实时同步以及全文搜索功能的知识库系统。
+k-Peach 是一款支持多语言、实时编辑更新同步以及全文搜索功能的知识库系统。
 
-通过 Markdown 文档构建知识库. 支持在线编辑
+## 多语言
+支持创建不同语言版本文档，通过界面选择不同语言实时切换。
 
-## **编辑功能**
+## 编辑/更新
+通过[stackedit](https://github.com/benweet/stackedit)支持在线编辑更新。 若需要**更新目录**结构需要下载文档包，创建后在上传。
 
-![enter image description here](https://cdn.v2ex.com/assets/sidebar/aftership_20190401.gif)
+## 全文搜索
+通过关键字，能立即查询到所需文档。
