@@ -4,11 +4,9 @@
 
 K-Peach fork Peach. 
 
-## Getting Help
+## TODO
 
-- [Getting Started](http://peachdocs.org/docs/intro/getting_started)
-- [Ship with Docker](https://peach/tree/master/docker)
-- [Join Discord](https://discord.gg/R7haPpK)
+- 开启 JieBa 分词会导致内存从 10M 升为 80M, 并且即使不搜索也会增加内存.
 
 ## License
 

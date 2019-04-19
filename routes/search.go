@@ -20,6 +20,7 @@ import (
 	"k-peach/pkg/setting"
 
 	"github.com/Unknwon/com"
+	log "github.com/sirupsen/logrus"
 	"github.com/wangbin/jiebago"
 )
 
@@ -29,6 +30,7 @@ var useJieBa = false
 func init() {
 	if com.IsFile("custom/dict.txt") {
 		seg.LoadDictionary("custom/dict.txt")
+		log.Info("load custom/dict.txt")
 		useJieBa = true
 	}
 }
@@ -51,6 +53,7 @@ func Search(ctx *context.Context) {
 	ctx.Data["Keyword"] = q
 
 	if useJieBa {
+		log.Info("use JieBa")
 		results := make([]*models.SearchResult, 0)
 		qs := seg.CutForSearch(q, true)
 		for word := range qs {
@@ -60,6 +63,7 @@ func Search(ctx *context.Context) {
 		}
 		ctx.Data["Results"] = results
 	} else {
+		log.Info("not use JieBa")
 		ctx.Data["Results"] = toc.Search(q)
 	}
 

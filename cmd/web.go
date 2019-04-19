@@ -53,19 +53,20 @@ func runWeb(ctx *cli.Context) {
 	setting.NewContext()
 	models.NewContext()
 
-	log.Info("Peach %s", setting.AppVer)
+	log.Infof("K-Peach %s", setting.AppVer)
 
 	m := macaron.New()
-	if !setting.ProdMode {
-		m.Use(macaron.Logger())
-	}
+	// if !setting.ProdMode {
+	// 	m.Use(macaron.Logger())
+	// }
 	m.Use(macaron.Recovery())
 	m.Use(macaron.Statics(macaron.StaticOptions{
-		SkipLogging: setting.ProdMode,
+		SkipLogging: true,
 	}, "custom/public", models.HTMLRoot))
 
 	m.Use(macaron.Static("public",
 		macaron.StaticOptions{
+			SkipLogging: true,
 			FileSystem: bindata.Static(bindata.Options{
 				Asset:      kbindata.Asset,
 				AssetDir:   kbindata.AssetDir,
