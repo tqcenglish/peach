@@ -1,11 +1,8 @@
 CACHE MANIFEST
-#ver:4/15/2019, 6:21:19 PM
+#ver:4/16/2019, 4:52:29 PM
 #plugin:5.0.5
 
 CACHE:
-/stackedit/icons-c75a9472175cc17394ba6428d867fbcf/favicon.ico
-/stackedit/icons-c75a9472175cc17394ba6428d867fbcf/manifest.json
-/stackedit/icons-c75a9472175cc17394ba6428d867fbcf/manifest.webapp
 /stackedit/db318479e10eb82ea36f.worker.js
 /stackedit/static/fonts/RobotoMono-Bold.819f3b2.woff
 /stackedit/static/fonts/RobotoMono-Regular.0b6a547.woff
@@ -21,15 +18,15 @@ CACHE:
 /stackedit/static/landing/navigation-bar.png
 /stackedit/static/sitemap.xml
 /stackedit/static/landing/gfm.png
-/stackedit/static/landing/mermaid.gif
 /stackedit/static/landing/logo.svg
+/stackedit/static/landing/mermaid.gif
 /stackedit/static/landing/smart-layout.png
-/stackedit/static/landing/twemoji.png
 /stackedit/static/landing/workspace.png
+/stackedit/static/landing/twemoji.png
 /stackedit/static/landing/abc.png
 /stackedit/static/landing/syntax-highlighting.gif
-/stackedit/static/landing/discussion.png
 /stackedit/static/landing/favicon.ico
+/stackedit/static/landing/discussion.png
 /stackedit/static/landing/providers.png
 /stackedit/static/landing/scroll-sync.gif
 /stackedit/manifest.be6b8ae17bbd0bcf75bdef61bd31f0d3.json

@@ -16,6 +16,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 	"runtime"
 
@@ -28,6 +29,9 @@ import (
 //APP_VER fork peach
 const APP_VER = "1.0.0"
 
+// GitCommit git 提交 hash
+var GitCommit string
+
 func init() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
 	setting.AppVer = APP_VER
@@ -37,7 +41,11 @@ func main() {
 	app := cli.NewApp()
 	app.Name = "Peach"
 	app.Usage = "Modern Documentation Knowledge Server"
-	app.Version = APP_VER
+	if GitCommit != "" {
+		app.Version = fmt.Sprintf("git hash %s", GitCommit) // 通过 git  hash
+	} else {
+		app.Version = APP_VER
+	}
 	app.Author = "tqcenglish"
 	app.Email = "tqcenglish@gmail.com"
 	app.Commands = []cli.Command{
