@@ -18,7 +18,20 @@ import (
 	"k-peach/models"
 	"k-peach/pkg/context"
 	"k-peach/pkg/setting"
+
+	"github.com/Unknwon/com"
+	"github.com/wangbin/jiebago"
 )
+
+var seg jiebago.Segmenter
+var useJieBa = false
+
+func init() {
+	if com.IsFile("custom/dict.txt") {
+		seg.LoadDictionary("custom/dict.txt")
+		useJieBa = true
+	}
+}
 
 // Search 搜索处理
 func Search(ctx *context.Context) {
@@ -36,7 +49,19 @@ func Search(ctx *context.Context) {
 	}
 
 	ctx.Data["Keyword"] = q
-	ctx.Data["Results"] = toc.Search(q)
+
+	if useJieBa {
+		results := make([]*models.SearchResult, 0)
+		qs := seg.CutForSearch(q, true)
+		for word := range qs {
+			for _, result := range toc.Search(word) {
+				results = append(results, result)
+			}
+		}
+		ctx.Data["Results"] = results
+	} else {
+		ctx.Data["Results"] = toc.Search(q)
+	}
 
 	ctx.HTML(200, "search")
 }

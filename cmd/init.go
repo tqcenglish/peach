@@ -98,6 +98,8 @@ func runNew(ctx *cli.Context) {
 	if yes {
 		fmt.Println("➜  Creating 'custom/templates'...")
 		restoreAssets(filepath.Join(target, "custom"), "templates")
+		fmt.Println("➜  Creating 'custom/dict'...")
+		restoreAssets(filepath.Join(target, "custom"), "dict.txt")
 
 		// Update configuration to use custom templates.
 		fmt.Println("➜  Updating custom configuration...")

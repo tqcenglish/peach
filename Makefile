@@ -9,7 +9,7 @@ run:
 	cd my.peach && ../k-peach web
 
 bindata:
-	go-bindata -o=pkg/bindata/bindata.go -ignore="\\.DS_Store|config.codekit|.less" -pkg=bindata templates/... conf/... public/... docs/...
+	go-bindata -o=pkg/bindata/bindata.go -ignore="\\.DS_Store|config.codekit|.less" -pkg=bindata dict.txt templates/... conf/... public/... docs/...
 
 release:
 	gox -osarch="linux/arm linux/amd64" -ldflags "-X main.GitCommit=$(shell git rev-list -1 HEAD)";
