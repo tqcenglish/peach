@@ -1183,3 +1183,7 @@ samp {
 .center {
   text-align: center;
 }
+
+.search-query {
+  color: #21ba45;
+}

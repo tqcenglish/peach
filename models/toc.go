@@ -17,6 +17,7 @@ package models
 import (
 	"bytes"
 	"fmt"
+	"html/template"
 	"io/ioutil"
 	"os"
 	"path"
@@ -195,12 +196,14 @@ func (t *Toc) GetDoc(name string) (*Node, bool) {
 	return nil, false
 }
 
+// SearchResult 搜索页面返回
 type SearchResult struct {
 	Title string
 	Path  string
-	Match string
+	Match template.HTML
 }
 
+// adjustRange 搜索输出列表字符长度控制
 func (n *Node) adjustRange(start int) (int, int) {
 	start -= 20
 	if start < 0 {
@@ -215,6 +218,7 @@ func (n *Node) adjustRange(start int) (int, int) {
 	return start, end
 }
 
+//Search 根据关键字 q 搜索
 func (t *Toc) Search(q string) []*SearchResult {
 	if len(q) == 0 {
 		return nil
@@ -227,10 +231,11 @@ func (t *Toc) Search(q string) []*SearchResult {
 	for i := range t.Nodes {
 		if idx := bytes.Index(t.Nodes[i].Text(), []byte(q)); idx > -1 {
 			start, end := t.Nodes[i].adjustRange(utf8.RuneCount(t.Nodes[i].Text()[:idx]))
+			htmlStr := strings.Replace(string(t.Nodes[i].runes[start:end]), q, fmt.Sprintf("<span class=\"search-query\">%s</span>", q), -1)
 			results = append(results, &SearchResult{
 				Title: t.Nodes[i].Title,
 				Path:  t.Nodes[i].Name,
-				Match: string(t.Nodes[i].runes[start:end]),
+				Match: template.HTML(htmlStr),
 			})
 		}
 	}
@@ -240,10 +245,11 @@ func (t *Toc) Search(q string) []*SearchResult {
 		for j := range t.Nodes[i].Nodes {
 			if idx := bytes.Index(t.Nodes[i].Nodes[j].Text(), []byte(q)); idx > -1 {
 				start, end := t.Nodes[i].Nodes[j].adjustRange(utf8.RuneCount(t.Nodes[i].Nodes[j].Text()[:idx]))
+				htmlStr := strings.Replace(string(t.Nodes[i].Nodes[j].runes[start:end]), q, fmt.Sprintf("<span class=\"search-query\">%s</span>", q), -1)
 				results = append(results, &SearchResult{
 					Title: t.Nodes[i].Nodes[j].Title,
 					Path:  path.Join(t.Nodes[i].Name, t.Nodes[i].Nodes[j].Name),
-					Match: string(t.Nodes[i].Nodes[j].runes[start:end]),
+					Match: template.HTML(htmlStr),
 				})
 			}
 		}

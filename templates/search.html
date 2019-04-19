@@ -12,7 +12,8 @@
 						<div class="ui header">
 							<a href="{{Page.DocsBaseURL}}/{{result.Path}}">{{result.Title}}</a>
 						</div>
-						<p>...{{result.Match}}...</p>
+						<!-- !可能会 错误解析不需要的html结果 -->
+						<p>...{{result.Match | safe}}...</p>
 					</div>
 				{% endfor %}
 			{% else %}
